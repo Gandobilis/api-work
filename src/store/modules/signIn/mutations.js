@@ -1,9 +1,9 @@
 const mutations = {
-  signIn(state, { token, user }) {
+  SIGN_IN(state, { token, user }) {
     state.token = token;
     state.user = user;
   },
-  signOut(state) {
+  SIGN_OUT(state) {
     state.token = null;
     state.user = null;
   },

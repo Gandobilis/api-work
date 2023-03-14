@@ -7,7 +7,7 @@ const actions = {
       password,
     });
     if (res.data.status) {
-      commit("signIn", {
+      commit("SIGN_IN", {
         token: res.data.token,
         user: res.data.user,
       });
