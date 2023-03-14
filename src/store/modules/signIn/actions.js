@@ -2,7 +2,7 @@ import axios from "axios";
 
 const actions = {
   async signIn({ commit }, { email, password }) {
-    const res = await axios.post("https://items.magischer.de/api/auth/login", {
+    const res = await axios.post("/auth/login", {
       email,
       password,
     });

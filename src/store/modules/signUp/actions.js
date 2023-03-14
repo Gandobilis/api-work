@@ -4,7 +4,7 @@ import store from "../signIn";
 const actions = {
   async signUp({}, { name, email, password }) {
     const res = await axios.post(
-      "https://items.magischer.de/api/auth/register",
+      "/auth/register",
       {
         name,
         email,
