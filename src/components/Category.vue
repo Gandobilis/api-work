@@ -50,7 +50,7 @@ const deleteCategory = async (id) =>
     <td class="px-6 py-4">
       <button
         @click="deleteCategory(category.id)"
-        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        class="font-medium text-red-600 dark:text-red-500 hover:underline"
       >
         Delete
       </button>
