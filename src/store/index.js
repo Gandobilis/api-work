@@ -1,10 +1,9 @@
-import { createStore } from "vuex";
+import {createStore} from "vuex";
 import categoriesPlugin from "./plugins/categories";
-import signInPlugin from "./plugins/signIn";
-import signUpPlugin from "./plugins/signUp";
+import authPlugin from "./plugins/auth";
 
 const store = createStore({
-  plugins: [categoriesPlugin, signInPlugin, signUpPlugin],
+  plugins: [categoriesPlugin, authPlugin],
 });
 
 export default store;

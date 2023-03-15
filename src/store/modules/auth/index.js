@@ -3,7 +3,7 @@ import actions from "./actions";
 import getters from "./getters";
 import mutations from "./mutations";
 
-const signIn = {
+const auth = {
   namespaced: true,
   state,
   getters,
@@ -11,4 +11,4 @@ const signIn = {
   mutations,
 };
 
-export default signIn;
+export default auth;

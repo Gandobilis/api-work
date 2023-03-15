@@ -1,5 +1,5 @@
 const getters = {
-  getCategories({ categories }) {
+  getCategories({categories}) {
     return categories;
   },
 };
