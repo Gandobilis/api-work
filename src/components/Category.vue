@@ -36,14 +36,23 @@ const deleteCategory = async (id) =>
     </th>
     <td class="px-6 py-4">{{ category.type }}</td>
     <td class="px-6 py-4 resize">
-      <div class="flex w-[100px]">
+      <div class="flex w-[100px]" >
         <input v-if="editing" v-model="newName"/>
         <button
             @click="editCategory(category.id)"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            class="font-medium ml-2 text-blue-600 dark:text-blue-500 hover:underline"
         >
-          Edit
+          {{ editing ? 'Save' : 'Edit' }}
         </button>
+        <div>
+          <button
+              v-if="editing"
+              @click="editing=!editing"
+              class="font-medium text-red-600 dark:text-red-500 hover:underline ml-2"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </td>
     <td class="px-6 py-4">
