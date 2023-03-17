@@ -1,5 +1,7 @@
 const state = {
-  categories: null,
+  categories: [],
+  searchName: "",
+  searchType: "",
 };
 
 export default state;

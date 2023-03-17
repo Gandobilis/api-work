@@ -1,4 +1,4 @@
-import {createStore} from "vuex";
+import { createStore } from "vuex";
 import categoriesPlugin from "./plugins/categories";
 import authPlugin from "./plugins/auth";
 
