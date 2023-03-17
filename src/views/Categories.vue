@@ -9,13 +9,15 @@ const logOut = inject('logOut');
 const store = useStore();
 
 const name = ref();
+const type = ref("news");
 
 const user = computed(() => store.getters["auth/getUser"])
 const categories = computed(() => store.getters["categories/getCategories"]);
 
 const addCategory = async () => {
-  await store.dispatch("categories/addCategory", name.value);
+  await store.dispatch("categories/addCategory", {name: name.value, type: type.value});
   name.value = null;
+  type.value = "news";
 };
 
 const renderDefaultAvatar = (e) => {
@@ -29,12 +31,12 @@ onMounted(() => store.dispatch("categories/getCategories"));
 
 <template>
   <div v-if="user">
-    <div class="sticky flex border-red-100">
+    <div class="flex border-red-100">
       <img
-          class="h-[150px] w-auto"
-          :src="user.avatar"
-          @error="renderDefaultAvatar"
           :alt="`Avatar of ${user.name}`"
+          :src="user.avatar"
+          class="h-[150px] w-auto"
+          @error="renderDefaultAvatar"
       />
       <div class="flex justify-center items-center flex-col">
         <h1 class="mb-[10px]">{{ user.name }}</h1>
@@ -45,38 +47,47 @@ onMounted(() => store.dispatch("categories/getCategories"));
           Sign Out
         </button>
       </div>
-      <form
-          class="w-full flex justify-center items-center max-w-sm"
-          @submit.prevent="addCategory"
-      >
-        <div class="flex items-center border-b border-teal-500 py-2">
-          <input
-              v-model="name"
-              class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-              type="text"
-              placeholder="Name"
-              aria-label="Full name"
-          />
-          <button
-              class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-              type="submit"
-          >
-            Add
-          </button>
-        </div>
-      </form>
+      <div class="flex justify-center items-center ml-72">
+        <form
+            class="flex justify-center items-center"
+            @submit.prevent="addCategory"
+        >
+          <div class="flex items-center border-b border-teal-500 py-2">
+            <select v-model="type"
+                    class="focus:outline-none border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+              <option value="news" selected>News</option>
+              <option value="product">Product</option>
+              <option value="social">Social</option>
+            </select>
+            <input
+                v-model="name"
+                aria-label="Full name"
+                class="ml-3 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="Name"
+                required
+                type="text"
+            />
+            <button
+                class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <div class="overflow-x-auto shadow-md sm:rounded-lg flex justify-center items-center">
+      <table class="w-full text-sm text-left text-neutral-900">
         <thead
-            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            class="text-xs text-gray-700 uppercase"
         >
         <tr>
-          <th scope="col" class="px-6 py-3">Name</th>
-          <th scope="col" class="px-6 py-3">Type</th>
-          <th scope="col" class="px-6 py-3"></th>
-          <th scope="col" class="px-6 py-3"></th>
+          <th class="px-6 py-3" scope="col">Name</th>
+          <th class="px-6 py-3" scope="col">Type</th>
+          <th class="px-6 py-3" scope="col"></th>
+          <th class="px-6 py-3" scope="col"></th>
         </tr>
         </thead>
         <tbody>

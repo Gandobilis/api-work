@@ -1,7 +1,7 @@
 const auth = {
   install(app, {store, router}) {
     const logOut = async () => {
-      await store.commit('auth/SIGN_OUT');
+      await store.dispatch('auth/signOut');
       await router.push('/');
     }
 

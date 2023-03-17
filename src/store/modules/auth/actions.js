@@ -1,16 +1,22 @@
 import axios from "axios";
 
 const actions = {
-  async auth({ commit }, { name, email, password, destination }) {
-    const data = name ? { name, email, password } : { email, password };
+  async auth({dispatch}, {data, destination}) {
     const res = await axios.post(`/auth/${destination}`, data);
     if (res.data.status) {
-      const { token, user } = res.data;
-      commit("SIGN_IN", {
+      const {token, user} = res.data;
+      await dispatch("signIn", {
         token,
         user,
       });
     }
+  },
+  signIn({}, {token, user}) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+  },
+  signOut() {
+    localStorage.clear();
   },
 };
 
